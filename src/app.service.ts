@@ -76,7 +76,6 @@ export class AppService {
     const payload = this.xMoneyApiClient.getWebviewCheckoutHtml(
       {
         publicKey: checkoutBody.publicKey,
-        cardId: checkoutBody.cardId,
         customer: {
           identifier: customer.id,
           firstName: customer.firstName,
@@ -167,6 +166,10 @@ export class AppService {
     return await this.xMoneyApiClient.getCards(customerId);
   }
   async getOrder(orderId: string) {
-    return await this.xMoneyApiClient.getOrder(orderId);
+    try {
+      return await this.xMoneyApiClient.getOrder(orderId);
+    } catch {
+      return {};
+    }
   }
 }
