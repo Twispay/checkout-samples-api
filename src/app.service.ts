@@ -17,10 +17,11 @@ import {
 @Injectable()
 export class AppService {
   private xMoneyApiClient: xMoneyApiClient;
+  private readonly privateKey: string = '';
 
   constructor() {
     this.xMoneyApiClient = new xMoneyApiClient({
-      secretKey: 'sk_test_',
+      secretKey: `sk_test_${this.privateKey}`,
       verbose: true,
     });
   }
@@ -55,7 +56,7 @@ export class AppService {
       },
       customData: checkoutBody.customData,
       cardTransactionMode: 'authAndCapture',
-      saveCard: true,
+      saveCard: checkoutBody.saveCard,
       backUrl: 'https://localhost:3002/transaction-result',
     });
 
@@ -93,7 +94,7 @@ export class AppService {
         },
         customData: checkoutBody.customData,
         cardTransactionMode: 'authAndCapture',
-        saveCard: true,
+        saveCard: checkoutBody.saveCard,
         backUrl: 'https://localhost:3002/transaction-result',
       },
       ThemeEnum.Light,
@@ -168,6 +169,25 @@ export class AppService {
   async getOrder(orderId: string) {
     try {
       return await this.xMoneyApiClient.getOrder(orderId);
+    } catch {
+      return {};
+    }
+  }
+
+  async getSessionToken() {
+    try {
+      const response = await fetch(
+        'https://api-stage.xmoney.com/auth/jwt-token',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${this.privateKey}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      return await response.json();
     } catch {
       return {};
     }

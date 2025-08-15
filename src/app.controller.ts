@@ -8,7 +8,7 @@ import {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Post('checkout-initialization')
   checkoutInitialization(
@@ -54,5 +54,10 @@ export class AppController {
   @Get('order/:id')
   async getOrder(@Param('id') orderId: string): Promise<any> {
     return await this.appService.getOrder(orderId);
+  }
+
+  @Get('session-token')
+  async getSessionToken(): Promise<any> {
+    return await this.appService.getSessionToken();
   }
 }
