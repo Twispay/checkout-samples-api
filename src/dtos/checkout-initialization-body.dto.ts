@@ -10,9 +10,6 @@ export class CheckoutInitializationBodyDto {
   @IsString()
   email: string;
 
-  @IsString()
-  cardName: string;
-
   @IsNumber()
   amount: number;
 

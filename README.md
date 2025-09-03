@@ -19,12 +19,14 @@ This is a sample API implementation demonstrating how to integrate with the xMon
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd checkout-samples-api
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -34,7 +36,7 @@ npm install
 The API uses the xMoney API SDK which requires a secret key. In this sample, a test key is used:
 
 ```typescript
-secretKey: 'sk_test_a55af115af6ae1fd6a38f3602e9d40d4'
+secretKey: 'sk_test_a55af115af6ae1fd6a38f3602e9d40d4';
 ```
 
 For production use, replace this with your actual secret key.
@@ -46,6 +48,7 @@ For production use, replace this with your actual secret key.
 **Endpoint:** `POST /checkout-initializion`
 
 **Request Body:**
+
 ```typescript
 {
   publicKey: string;
@@ -54,7 +57,6 @@ For production use, replace this with your actual secret key.
   firstName: string;
   lastName: string;
   email: string;
-  cardName: string;
 }
 ```
 
@@ -66,6 +68,7 @@ Returns an `OrderOutputDto` containing the checkout initialization data.
 **Endpoint:** `POST /payment-confirm`
 
 **Request Body:**
+
 ```typescript
 {
   result: string; // Encrypted payment result from XMoney
