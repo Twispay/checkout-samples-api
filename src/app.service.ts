@@ -17,11 +17,10 @@ import {
 @Injectable()
 export class AppService {
   private xMoneyApiClient: xMoneyApiClient;
-  private readonly privateKey: string = '';
 
   constructor() {
     this.xMoneyApiClient = new xMoneyApiClient({
-      secretKey: `sk_test_${this.privateKey}`,
+      secretKey: process.env.PRIVATE_KEY,
       verbose: true,
     });
   }
@@ -175,21 +174,6 @@ export class AppService {
   }
 
   async getSessionToken() {
-    try {
-      const response = await fetch(
-        'https://api-stage.xmoney.com/auth/jwt-token',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${this.privateKey}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-
-      return await response.json();
-    } catch {
-      return {};
-    }
+    return await this.xMoneyApiClient.getSessionToken();
   }
 }
