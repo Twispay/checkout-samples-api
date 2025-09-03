@@ -20,7 +20,7 @@ export class AppService {
 
   constructor() {
     this.xMoneyApiClient = new xMoneyApiClient({
-      secretKey: 'sk_test_',
+      secretKey: process.env.PRIVATE_KEY,
       verbose: true,
     });
   }
@@ -55,7 +55,7 @@ export class AppService {
       },
       customData: checkoutBody.customData,
       cardTransactionMode: 'authAndCapture',
-      saveCard: true,
+      saveCard: checkoutBody.saveCard,
       backUrl: 'https://localhost:3002/transaction-result',
     });
 
@@ -93,7 +93,7 @@ export class AppService {
         },
         customData: checkoutBody.customData,
         cardTransactionMode: 'authAndCapture',
-        saveCard: true,
+        saveCard: checkoutBody.saveCard,
         backUrl: 'https://localhost:3002/transaction-result',
       },
       ThemeEnum.Light,
@@ -171,5 +171,9 @@ export class AppService {
     } catch {
       return {};
     }
+  }
+
+  async getSessionToken() {
+    return await this.xMoneyApiClient.getSessionToken();
   }
 }

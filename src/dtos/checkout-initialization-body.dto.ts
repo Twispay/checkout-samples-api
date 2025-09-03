@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CheckoutInitializationBodyDto {
   @IsString()
@@ -9,9 +9,6 @@ export class CheckoutInitializationBodyDto {
 
   @IsString()
   email: string;
-
-  @IsString()
-  cardName: string;
 
   @IsNumber()
   amount: number;
@@ -29,4 +26,8 @@ export class CheckoutInitializationBodyDto {
   @IsOptional()
   @IsNumber()
   cardId?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  saveCard?: boolean;
 }
