@@ -30,4 +30,8 @@ export class CheckoutInitializationBodyDto {
   @IsOptional()
   @IsBoolean()
   saveCard?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  xMoneyCustomerId?: number;
 }
