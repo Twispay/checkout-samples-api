@@ -64,7 +64,6 @@ export class AppService {
 
   async getWebviewCheckoutHtml(
     checkoutBody: CheckoutInitializationBodyDto,
-    xMoneyCustomerId?: number,
   ): Promise<any> {
     // You can use user data from checkoutBody
     // Or fetch them from your database
@@ -97,7 +96,7 @@ export class AppService {
         backUrl: 'https://localhost:3002/transaction-result',
       },
       ThemeEnum.Light,
-      xMoneyCustomerId,
+      checkoutBody.xMoneyCustomerId,
     );
 
     return payload;
